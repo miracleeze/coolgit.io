@@ -1,6 +1,7 @@
 // The controller needs access to both the model and the view...so let's import them
 import HikeModel from "./hikeModel.js";
 import HikesView from "./hikesView.js";
+import Comments from "../TeamActivityW07/comments.js";
 
 // Just like with the view we should organize the functions we need to our controller. Let's use a class for this one
 
@@ -18,6 +19,7 @@ export default class HikesController {
     this.hikesView.renderHikeList(this.parentElement, hikeList);
     // after the hikes have been rendered...add our listener
     this.addHikeListener();
+    this.comments.showCommentList();
   }
   showOneHike(hikeName) {
     const hike = this.hikeModel.getHikeByName(hikeName);
@@ -25,6 +27,7 @@ export default class HikesController {
       () => {
         this.showHikeList();
       };
+    this.comments.showCommentList(hikeName);
   }
   // in order to show the details of a hike ontouchend we will need to attach a listener AFTER the list of hikes has been built. The function below does that.
   addHikeListener() {
